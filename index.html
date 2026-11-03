@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prateek & Deepika | Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d5ad65;--dark-gold:#a77c38;--maroon:#601c2b;--cream:#fff8ed;--ink:#54202a}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'Poppins',sans-serif;overflow-x:hidden;line-height:1.6}
+section{padding:85px 20px;text-align:center}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* BLESSING (set once in the script: BLESSING) */
+.god-name{font-family:'Cormorant Garamond',serif;font-size:28px;letter-spacing:4px;color:#f5d79d;margin-bottom:24px}
+
+/* OPENING */
+#opening{position:fixed;inset:0;z-index:1000;background:radial-gradient(circle,#852c3d,#3c101e);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;transition:1s ease;padding:20px}
+#opening.hide{opacity:0;visibility:hidden}
+.opening-title{font-family:'Cormorant Garamond',serif;color:#f8dfad;font-size:24px;letter-spacing:5px;margin-bottom:35px}
+.heart{font-size:100px;cursor:pointer;animation:heartbeat 1.3s infinite;filter:drop-shadow(0 0 25px #ffb4b4);background:none;border:0;line-height:1}
+.tap-text{color:#f6dfba;margin-top:35px;letter-spacing:3px;font-size:12px;animation:blink 1.5s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes blink{50%{opacity:.4}}
+#invitation{display:none;animation:fadeIn 2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(rgba(48,10,20,.72),rgba(48,10,20,.82)),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;padding:45px 20px;color:#fff}
+.hero-content{max-width:850px;border:1px solid rgba(225,190,125,.8);padding:55px 30px;outline:1px solid rgba(225,190,125,.35);outline-offset:9px}
+.small-heading{font-size:12px;letter-spacing:5px;color:#edcf91;text-transform:uppercase}
+.hero h1{font-family:'Great Vibes',cursive;font-size:clamp(55px,10vw,100px);font-weight:400;color:#f5d79d;margin:20px 0 10px;line-height:1.15}
+.amp{font-family:'Cormorant Garamond',serif;color:#fff;font-size:42px;line-height:1}
+.parents{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:#f6e6c8;line-height:1.5}
+.parents b{display:block;font-style:normal;font-weight:600;letter-spacing:1px;color:#f5d79d;font-size:23px}
+.hero-date{font-family:'Cormorant Garamond',serif;font-size:25px;letter-spacing:4px;margin-top:10px}
+.hero-location{margin-top:12px;font-size:13px;letter-spacing:2px}
+.btn-rsvp{display:inline-block;margin-top:30px;padding:14px 34px;background:var(--gold);color:#3c101e;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:2px;transition:.3s}
+.btn-rsvp:hover{background:#f5d79d}
+
+.section-heading{font-family:'Great Vibes',cursive;font-size:55px;color:var(--maroon);margin-bottom:10px;line-height:1.2}
+.gold-line{width:85px;height:2px;background:var(--gold);margin:20px auto 30px}
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.7;max-width:720px;margin:auto;color:#75515a}
+
+/* FAMILIES */
+.families{background:#f7ecdf}
+.family-container{display:flex;justify-content:center;flex-wrap:wrap;gap:60px;margin-top:35px}
+.family{min-width:240px;max-width:320px}
+.family h3{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--dark-gold)}
+.family .who{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;margin-top:8px;color:#75515a}
+.family p{margin-top:10px;font-size:12px;letter-spacing:3px}
+
+/* COUNTDOWN */
+.countdown-section{background:var(--maroon);color:#fff}
+.countdown-section .section-heading{color:#f3d59f}
+.countdown{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:35px}
+.time-box{border:1px solid #caa35f;padding:22px 15px;min-width:90px;background:rgba(255,255,255,.04)}
+.time-box span{display:block;font-family:'Cormorant Garamond',serif;font-size:42px;color:#f2d39a;line-height:1.1}
+.time-box small{font-size:10px;letter-spacing:2px}
+
+/* EVENTS: each function has its own theme */
+.events-intro{background:var(--cream);padding-bottom:50px}
+.event-band{padding:80px 20px;position:relative;overflow:hidden}
+.event-card{max-width:680px;margin:auto;padding:45px 28px;border:1px solid var(--bd);outline:1px solid var(--bd2);outline-offset:8px;background:var(--cardbg);position:relative;z-index:1;text-align:center}
+.event-band::before,.event-band::after{content:attr(data-deco);position:absolute;font-size:120px;opacity:.18;line-height:1}
+.event-band::before{top:10px;left:2%}
+.event-band::after{bottom:10px;right:2%;transform:rotate(180deg)}
+.event-icon{font-size:38px}
+.event-name{font-family:'Great Vibes',cursive;font-size:clamp(42px,8vw,60px);color:var(--title);line-height:1.2;margin:6px 0}
+.event-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:var(--text)}
+.event-meta{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 32px;margin-top:22px;font-size:14px;color:var(--text)}
+.event-meta b{display:block;font-size:11px;letter-spacing:2px;font-weight:500;color:var(--title);text-transform:uppercase}
+.dress{margin-top:22px;display:inline-block;padding:9px 20px;border:1px dashed var(--title);color:var(--title);font-size:13px}
+.event-extra{margin-top:18px;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text)}
+.ev-map{display:block;width:max-content;margin:18px auto 0;color:var(--title);border-bottom:1px solid var(--title);text-decoration:none;font-size:12px;letter-spacing:2px}
+
+.t-rango{--bd:#d0006f;--bd2:rgba(208,0,111,.4);--cardbg:rgba(255,255,255,.85);--title:#d0006f;--text:#4a1030;background:linear-gradient(135deg,#ff2e93,#ff7a00 35%,#ffd400 65%,#00c2ff)}
+.t-sangeet{--bd:#e6b8ff;--bd2:rgba(230,184,255,.4);--cardbg:rgba(30,8,60,.45);--title:#ffd6f0;--text:#f3e6ff;background:radial-gradient(circle at 20% 20%,#7a2fc0,#3a1070 60%,#1f0848)}
+.t-baarat{--bd:#ffd27a;--bd2:rgba(255,210,122,.4);--cardbg:rgba(70,15,0,.5);--title:#ffe3a3;--text:#fff1d6;background:linear-gradient(135deg,#ff9933,#e8590c 55%,#a4262c)}
+.t-wedding{--bd:#e1be7d;--bd2:rgba(225,190,125,.4);--cardbg:rgba(60,12,24,.55);--title:#f4d8a5;--text:#fbe9cd;background:linear-gradient(rgba(150,28,48,.88),rgba(90,14,30,.92)),url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1600&q=85') center/cover}
+.t-finale{--bd:#c9a45a;--bd2:rgba(201,164,90,.4);--cardbg:rgba(5,12,30,.5);--title:#e9cd8e;--text:#dbe3f5;background:radial-gradient(circle at 80% 10%,#26407a,#0d1b3d 55%,#050b1c)}
+
+/* STAY + LOCATION */
+.stay-note{margin-top:22px;font-family:'Poppins',sans-serif;font-size:13px;color:#8a6d6d;letter-spacing:.5px}
+.location{background:#f7ecdf}
+.location h3{font-family:'Cormorant Garamond',serif;font-size:34px;margin:15px 0 10px}
+.map-button{display:inline-block;margin-top:25px;padding:15px 30px;border:1px solid var(--dark-gold);background:var(--maroon);color:#fff;text-decoration:none;letter-spacing:2px;font-size:12px;transition:.3s}
+.map-button:hover{background:var(--dark-gold)}
+
+/* RSVP */
+.rsvp{background:linear-gradient(180deg,var(--cream),#f4e3cc)}
+.rsvp-box{max-width:560px;margin:35px auto 0;background:#fff;padding:38px 28px;border:1px solid #e6d3b2;box-shadow:0 10px 40px rgba(96,28,43,.1)}
+.rsvp-box p{font-size:15px}
+.id-note{margin-top:18px;padding:12px 16px;background:#fbeaea;border:1px solid var(--maroon);color:var(--maroon);font-weight:500;font-size:14px!important}
+.btn-form{display:block;margin-top:26px;padding:16px;background:var(--maroon);color:#fff;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:2px;transition:.3s}
+.btn-form:hover{background:var(--dark-gold)}
+.form-note{margin-top:14px;font-size:12px!important;color:#8a6d6d}
+
+footer{background:#42121e;color:#f3d59f;text-align:center;padding:65px 20px}
+footer h2{font-family:'Great Vibes',cursive;font-size:58px;font-weight:400;line-height:1.2}
+footer p{margin-top:15px;font-size:12px;letter-spacing:2px}
+
+@media(max-width:600px){
+.hero-content{padding:45px 15px}.hero-date{font-size:19px}.section-heading{font-size:44px}
+.time-box{min-width:75px;padding:15px 8px}.time-box span{font-size:32px}.subtitle{font-size:21px}
+.event-card{padding:38px 18px}.event-band::before,.event-band::after{font-size:80px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div id="opening">
+  <div class="god-name"></div>
+  <div class="opening-title">YOU ARE CORDIALLY INVITED</div>
+  <button class="heart" onclick="openInvitation()" aria-label="Open invitation">❤️</button>
+  <div class="tap-text">TAP THE HEART TO OPEN</div>
+</div>
+
+<div id="invitation">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="god-name"></div>
+    <div class="small-heading">Together With Their Families</div>
+    <h1>Prateek Kharbanda</h1>
+    <div class="parents">son of<b>Satish &amp; Meenu Kharbanda</b></div>
+    <div class="amp">&amp;</div>
+    <h1 style="margin-top:10px">Deepika Paraswani</h1>
+    <div class="parents">daughter of<b>Raju &amp; Kiran Paraswani</b></div>
+    <div class="gold-line"></div>
+    <div class="hero-date">13 &amp; 14 FEBRUARY 2027</div>
+    <div class="hero-location">SINCLAIRS PALACE RETREAT · UDAIPUR</div>
+    <a class="btn-rsvp" href="#rsvp">RSVP NOW</a>
+  </div>
+</div>
+
+<!-- MESSAGE -->
+<section>
+  <div class="section-heading">A Celebration of Love</div>
+  <div class="gold-line"></div>
+  <p class="subtitle">
+    With the blessings of the Almighty and the love of our families, we joyfully invite you to celebrate the beautiful beginning of a new journey.
+    <br><br>
+    Join us as two hearts become one and two families come together in a celebration of love, laughter and togetherness.
+  </p>
+</section>
+
+<!-- FAMILIES -->
+<section class="families">
+  <div class="section-heading">With Love &amp; Blessings</div>
+  <div class="gold-line"></div>
+  <div class="family-container">
+    <div class="family">
+      <h3>Kharbanda Family</h3>
+      <div class="who">Mr. Satish &amp; Mrs. Meenu Kharbanda</div>
+      <p>GROOM'S FAMILY</p>
+    </div>
+    <div class="family">
+      <h3>Paraswani Family</h3>
+      <div class="who">Mr. Raju &amp; Mrs. Kiran Paraswani</div>
+      <p>BRIDE'S FAMILY</p>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <div class="section-heading">The Big Day</div>
+  <p style="letter-spacing:3px;font-size:11px">COUNTDOWN TO THE WEDDING CEREMONY</p>
+  <div class="countdown">
+    <div class="time-box"><span id="days">00</span><small>DAYS</small></div>
+    <div class="time-box"><span id="hours">00</span><small>HOURS</small></div>
+    <div class="time-box"><span id="minutes">00</span><small>MINUTES</small></div>
+    <div class="time-box"><span id="seconds">00</span><small>SECONDS</small></div>
+  </div>
+  <p style="margin-top:30px;font-size:12px;color:#e7cda7">14 FEBRUARY 2027 · 12:00 NOON</p>
+</section>
+
+<!-- EVENTS -->
+<section class="events-intro">
+  <div class="section-heading">Wedding Celebrations</div>
+  <div class="gold-line"></div>
+  <p class="subtitle">Five functions, each with its own colours. Dress to match the mood.</p>
+</section>
+
+<div class="event-band t-rango" data-deco="🎡">
+  <div class="event-card">
+    <div class="event-icon">🎨</div>
+    <div class="event-name">Rango ka Mela</div>
+    <div class="event-tag">Mehndi, Haldi and a carnival of colours</div>
+    <div class="event-meta">
+      <div><b>Date</b>13 February 2027</div>
+      <div><b>Time</b>12:00 PM</div>
+      <div><b>Venue</b>Sinclairs Palace Retreat</div>
+    </div>
+    <div class="dress">Dress code: Bright, poppy carnival colours</div>
+    <a class="ev-map map-link" target="_blank" rel="noopener noreferrer">VIEW LOCATION ↗</a>
+  </div>
+</div>
+
+<div class="event-band t-sangeet" data-deco="✨">
+  <div class="event-card">
+    <div class="event-icon">✨</div>
+    <div class="event-name">Rasam-e-Sagai aur Sangeet</div>
+    <div class="event-tag">Bling, Beats &amp; Blessings</div>
+    <div class="event-meta">
+      <div><b>Date</b>13 February 2027</div>
+      <div><b>Time</b>7:00 PM</div>
+      <div><b>Venue</b>Sinclairs Palace Retreat</div>
+    </div>
+    <div class="dress">Dress code: Jewel tones, glam &amp; sparkle</div>
+    <a class="ev-map map-link" target="_blank" rel="noopener noreferrer">VIEW LOCATION ↗</a>
+  </div>
+</div>
+
+<div class="event-band t-baarat" data-deco="🐎">
+  <div class="event-card">
+    <div class="event-icon">🐎</div>
+    <div class="event-name">The Baarat</div>
+    <div class="event-tag">Dhol, dance and the groom's grand arrival</div>
+    <div class="event-meta">
+      <div><b>Date</b>14 February 2027</div>
+      <div><b>Time</b>10:30 AM</div>
+      <div><b>Venue</b>Sinclairs Palace Retreat</div>
+    </div>
+    <div class="dress">Dress code: Saffron, orange &amp; festive ethnic wear</div>
+    <a class="ev-map map-link" target="_blank" rel="noopener noreferrer">VIEW LOCATION ↗</a>
+  </div>
+</div>
+
+<div class="event-band t-wedding" data-deco="🙏">
+  <div class="event-card">
+    <div class="event-icon">🙏</div>
+    <div class="event-name">The Wedding Ceremony</div>
+    <div class="event-tag">Anand Karaj</div>
+    <div class="event-meta">
+      <div><b>Date</b>14 February 2027</div>
+      <div><b>Time</b>12:00 Noon</div>
+      <div><b>Venue</b>Sinclairs Palace Retreat</div>
+    </div>
+    <div class="event-extra">Laava in the presence of Guru Granth Sahib Ji</div>
+    <div class="dress">Dress code: Traditional, head covered at the Gurdwara rites</div>
+    <a class="ev-map map-link" target="_blank" rel="noopener noreferrer">VIEW LOCATION ↗</a>
+  </div>
+</div>
+
+<div class="event-band t-finale" data-deco="🥂">
+  <div class="event-card">
+    <div class="event-icon">🥂</div>
+    <div class="event-name">The Grand Finale</div>
+    <div class="event-tag">The Newlywed Ball</div>
+    <div class="event-meta">
+      <div><b>Date</b>14 February 2027</div>
+      <div><b>Time</b>7:00 PM</div>
+      <div><b>Venue</b>Sinclairs Palace Retreat</div>
+    </div>
+    <div class="dress">Dress code: Black tie, midnight blue &amp; gold</div>
+    <a class="ev-map map-link" target="_blank" rel="noopener noreferrer">VIEW LOCATION ↗</a>
+  </div>
+</div>
+
+<!-- STAY -->
+<section>
+  <div class="section-heading">Your Stay Awaits</div>
+  <div class="gold-line"></div>
+  <p class="subtitle">
+    We look forward to welcoming you to our wedding celebrations in the beautiful city of Udaipur.
+    <br><br>
+    <strong>Check-in: 13 February 2027</strong><br>
+    9:00 AM – 11:00 AM
+  </p>
+  <p class="stay-note">Note: Check-out is on 15 February 2027 by 11:00 AM.</p>
+</section>
+
+<!-- LOCATION -->
+<section class="location">
+  <div class="section-heading">The Wedding Destination</div>
+  <div class="gold-line"></div>
+  <div style="font-size:45px">📍</div>
+  <h3>Sinclairs Palace Retreat Udaipur</h3>
+  <p class="subtitle">Udaipur, Rajasthan, India</p>
+  <a class="map-button map-link" target="_blank" rel="noopener noreferrer">OPEN LOCATION IN MAPS ↗</a>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp" id="rsvp">
+  <div class="section-heading">Kindly RSVP</div>
+  <div class="gold-line"></div>
+  <p class="subtitle">Please let us know by <strong>30 November 2026</strong> so we can plan your stay and your seat.</p>
+
+  <div class="rsvp-box">
+    <p>Fill in the RSVP form with your guest details, the functions you will attend and your stay requirements.</p>
+    <p class="id-note">📎 Uploading your Aadhaar or Passport in the form is mandatory.</p>
+    <a id="formBtn" class="btn-form" target="_blank" rel="noopener noreferrer">OPEN RSVP FORM ↗</a>
+    <p class="form-note">You will need to sign in with a Google account to upload your ID.</p>
+  </div>
+</section>
+
+<footer>
+  <h2>With Love,</h2>
+  <h2>Prateek &amp; Deepika</h2>
+  <p>THE KHARBANDA &amp; PARASWANI FAMILIES</p>
+  <div style="font-size:30px;margin-top:25px">♥</div>
+  <p>13 – 14 FEBRUARY 2027</p>
+</footer>
+
+</div>
+
+<script>
+// ===== SETTINGS: change these before sharing =====
+// 1. Blessing shown at the very top (decide with family)
+const BLESSING = "॥ Hare Krishna ॥";
+// 2. Paste your Google Form link here
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeHOd9-eOCGQw77NW9D-0kqC02U0mWwcjykn3d6HRAfU_JTGw/viewform";
+// 3. Google Maps link of the venue (used for every function)
+const MAP_URL = "https://www.google.com/maps/place/Sinclairs+Palace+Retreat+Udaipur/@24.8472766,73.3687716,38175m/data=!3m1!1e3!4m13!1m2!2m1!1ssinclairs+retreat+resort+udaipur!3m9!1s0x39680f317d819f2f:0x962a238edfa1c657!5m2!4m1!1i2!8m2!3d24.8472766!4d73.6571627!15sCiBzaW5jbGFpcnMgcmV0cmVhdCByZXNvcnQgdWRhaXB1ciIDiAEBWiIiIHNpbmNsYWlycyByZXRyZWF0IHJlc29ydCB1ZGFpcHVykgEFaG90ZWyaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnhrVlZWWVVsZE5WM2hOVjJ4S2VHRXpTWGhWTWxKT1dsWldOVTVHUlJBQuABAPoBBAgAEEY!16s%2Fg%2F11x34j8z54?entry=ttu";
+
+document.querySelectorAll('.god-name').forEach(e => e.textContent = BLESSING);
+document.querySelectorAll('.map-link').forEach(a => a.href = MAP_URL);
+const formBtn = document.getElementById('formBtn');
+formBtn.href = GOOGLE_FORM_URL;
+formBtn.addEventListener('click', e => {
+  if (GOOGLE_FORM_URL.startsWith('PASTE')) {
+    e.preventDefault();
+    alert('RSVP form link is not added yet.');
+  }
+});
+
+function openInvitation(){
+  const o = document.getElementById('opening');
+  o.classList.add('hide');
+  setTimeout(()=>{
+    o.style.display='none';
+    document.getElementById('invitation').style.display='block';
+    window.scrollTo(0,0);
+  },1000);
+}
+
+// Countdown (IST)
+const weddingDate = new Date("2027-02-14T12:00:00+05:30").getTime();
+function pad(n){return String(n).padStart(2,'0')}
+function updateCountdown(){
+  let d = weddingDate - Date.now();
+  if(d < 0) d = 0;
+  document.getElementById('days').innerText = pad(Math.floor(d/864e5));
+  document.getElementById('hours').innerText = pad(Math.floor(d%864e5/36e5));
+  document.getElementById('minutes').innerText = pad(Math.floor(d%36e5/6e4));
+  document.getElementById('seconds').innerText = pad(Math.floor(d%6e4/1e3));
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
